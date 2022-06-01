@@ -134,6 +134,103 @@ else
 
 
 
+////Select Edit element and click
+IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+editButton.Click();
+Console.WriteLine("edit button clicked");
+Thread.Sleep(4500);
+
+//Select time option typecode dropdown
+//IWebElement dropDownOption = driver.FindElement(By.XPath("//*[@id=TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[2]"));
+//dropDownOption.Click();
+
+//IWebElement tmOption = driver.FindElement(By.XPath("//*[@id='TypeCode_option_selected']"));
+//tmOption.Click();
+//Thread.Sleep(3500);
+
+//Select code element and give new input
+//CodeBox.click
+
+IWebElement editCode = driver.FindElement(By.Id("Code"));
+editCode.Clear();
+editCode.SendKeys("Code666");
+Console.WriteLine("code entered");
+Thread.Sleep(2500);
+
+//select Description element and new input 
+
+IWebElement editDescriptionTextBox = driver.FindElement(By.Id("Description"));
+editDescriptionTextBox.Clear();
+editDescriptionTextBox.SendKeys("Modified first time record");
+Console.WriteLine("new description entered");
+Thread.Sleep(2500);
+
+//identify and clear price per unit and send new input to code
+
+IWebElement priceInputTags = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]"));
+priceInputTags.Click();
+Thread.Sleep(5000);
+
+IWebElement editPrice = driver.FindElement(By.Id("Price"));
+editPrice.Clear();
+Thread.Sleep(2000);
+priceInputTags.Click();
+editPrice.SendKeys("24");
+Console.WriteLine("new price entered");
+
+Thread.Sleep(2500);
+
+//click save element
+IWebElement editSave = driver.FindElement(By.Id("SaveButton"));
+editSave.Click();
+Console.WriteLine("record edit saved");
+
+Thread.Sleep(2000);
+//Click go to lastPageButton 
+IWebElement goToLastPageButtton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+goToLastPageButtton.Click();
+Thread.Sleep(2000);
+
+//check the time record is edited
+IWebElement editNewCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+
+if (editNewCode.Text == "Code666")
+{
+    Console.WriteLine("new time record edited.Test passed");
+}
+
+else
+{
+    Console.WriteLine("Time record has not been edited. Test failed");
+}
+
+
+//delete function
+IWebElement delete = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
+delete.Click();
+Thread.Sleep(2000);
+Console.WriteLine("Delete Button Clicked");
+Thread.Sleep(2000);
+
+//Click ok button
+IAlert Alert = driver.SwitchTo().Alert();
+Alert.Accept();
+Console.WriteLine("ok button clicked");
+Thread.Sleep(2000);
+
+//check the item is deleted
+IWebElement delElement = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+if (delElement.Text != "Code666")
+{
+    Console.WriteLine("row deleted");
+}
+else
+{
+    Console.WriteLine("row not deleted");
+}
+
+
+
 
 
 
