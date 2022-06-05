@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using RepoMay2022.Utilities;
 using System;
 using System.Collections.Generic;
@@ -14,17 +15,18 @@ namespace RepoMay2022.Pages
         {
             //click on create new button
             driver.FindElement(By.XPath("//*[@id='container']/p/a")).Click();
-            WaitHelpers.WaitToBeClickable(driver,"XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 2);
+            WaitHelpers.WaitToBeClickable(driver, "XPath", "//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]", 2);
 
-            //select Meterial from Typecode drop down
-            driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]"));
-            driver.FindElement(By.XPath("//*[@id='TypeCode_option_selected']"));
+            //select Meterial from Typecode drop down button
+            driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[1]")).Click();
+
+            driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[1]")).Click();
 
             //identify the Code box and input a code
-            driver.FindElement(By.XPath("//*[@id='Code']")).SendKeys("Code1");
+            driver.FindElement(By.Id("Code")).SendKeys("Material Code1");
 
             //identify the Description box and input a code
-            driver.FindElement(By.XPath("//*[@id='Description']")).SendKeys("First Record");
+            driver.FindElement(By.XPath("//*[@id='Description']")).SendKeys("First Material Record");
 
             //identify the Price per unit and input a code
             driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[4]/div/span[1]/span/input[1]")).Click();
@@ -39,16 +41,18 @@ namespace RepoMay2022.Pages
             Thread.Sleep(2000);
 
             //Check if Meterial record created
-            IWebElement Newcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement newcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+           
+                 if(newcode.Text == "Material Code1")
+                {
+                    Console.WriteLine("New meterial record created successfull,Test Passed");
+                }
+                else
+                {
+                    Console.WriteLine("New meterial record has not been Created, Test Failed");
+                }
 
-            if (Newcode.Text == "Code1")
-            {
-                Console.WriteLine("New meterial record created successfull,Test Passed");
-            }
-            else
-            {
-                Console.WriteLine("New meterial record has not been Created, Test Failed");
-            }
+
 
 
 
@@ -67,14 +71,14 @@ namespace RepoMay2022.Pages
             //select time from Typecode drop down
             IWebElement dropDown = driver.FindElement(By.XPath("//*[@id='TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[2]"));
             dropDown.Click();
-            IWebElement timeOption = driver.FindElement(By.XPath("//*[@id='TypeCode_option_selected']"));
+            IWebElement timeOption = driver.FindElement(By.XPath("//*[@id='TypeCode_listbox']/li[2]"));
 
             //identify the Code box and input a code
-            IWebElement CodeBox = driver.FindElement(By.XPath("//*[@id='Code']"));
+            IWebElement CodeBox = driver.FindElement(By.Id("Code"));
             CodeBox.SendKeys("TimeCode1");
 
             //identify the Description box and input a code
-            IWebElement descriptionBox = driver.FindElement(By.XPath("//*[@id='Description']"));
+            IWebElement descriptionBox = driver.FindElement(By.Id("Description"));
             descriptionBox.SendKeys("First Time Record ");
 
             //identify the Price per unit and input a code
@@ -93,7 +97,6 @@ namespace RepoMay2022.Pages
 
             //Check if Time record created
             IWebElement newTimeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-
             if (newTimeCode.Text == "TimeCode1")
             {
                 Console.WriteLine("New time record created successfull,Test Passed");
@@ -105,32 +108,20 @@ namespace RepoMay2022.Pages
 
         }
 
-        internal void DeleteTM(IWebDriver driver)
+        public void EditTM(IWebDriver driver)
         {
-            throw new NotImplementedException();
-        }
-
-        internal void EditTM(IWebDriver driver)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void EditTM(IWebElement driver)
-        {
-
-            ////Select Edit element and click
+            Thread.Sleep(2000);
+            //Go to last page where new record created will be
+            IWebElement goToLastPageBtn1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageBtn1.Click();
+            Thread.Sleep(2000);
+            //Select Edit element and click
             IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             editButton.Click();
             Console.WriteLine("edit button clicked");
             Thread.Sleep(4500);
 
-            //Select time option typecode dropdown
-            //IWebElement dropDownOption = driver.FindElement(By.XPath("//*[@id=TimeMaterialEditForm']/div/div[1]/div/span[1]/span/span[2]"));
-            //dropDownOption.Click();
-
-            //IWebElement tmOption = driver.FindElement(By.XPath("//*[@id='TypeCode_option_selected']"));
-            //tmOption.Click();
-            //Thread.Sleep(3500);
+            
 
             //Select code element and give new input
             //CodeBox.click
@@ -176,9 +167,9 @@ namespace RepoMay2022.Pages
             Thread.Sleep(2000);
 
             //check the time record is edited
-            IWebElement editNewCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement newEditCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            if (editNewCode.Text == "Code666")
+            if (newEditCode.Text == "Code666")
             {
                 Console.WriteLine("new time record edited.Test passed");
             }
@@ -187,11 +178,19 @@ namespace RepoMay2022.Pages
             {
                 Console.WriteLine("Time record has not been edited. Test failed");
             }
+
+
+
         }
-        
-        
-        public void DeleteTM(IWebElement driver)
+
+
+        public void DeleteTM(IWebDriver driver)
          {
+            Thread.Sleep(2000);
+
+            IWebElement goToLastPageButtton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageButtton.Click();
+            Thread.Sleep(2000);
             //delete function
             IWebElement delete = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
             delete.Click();
@@ -200,9 +199,14 @@ namespace RepoMay2022.Pages
             Thread.Sleep(2000);
 
             //Click ok button
-            IAlert Alert = driver.SwitchTo().Alert();
-            Alert.Accept();
+            IAlert okButton = driver.SwitchTo().Alert();
+            okButton.Accept();
             Console.WriteLine("ok button clicked");
+            Thread.Sleep(2000);
+            
+
+            IWebElement goToLastPageBtn1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageBtn1.Click();
             Thread.Sleep(2000);
 
             //check the item is deleted
@@ -215,6 +219,8 @@ namespace RepoMay2022.Pages
             {
                 Console.WriteLine("row not deleted");
             }
+
+
 
 
         }

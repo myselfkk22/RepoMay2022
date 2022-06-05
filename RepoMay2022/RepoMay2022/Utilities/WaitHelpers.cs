@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+    
 namespace RepoMay2022.Utilities
 {
     public class WaitHelpers
@@ -14,18 +14,18 @@ namespace RepoMay2022.Utilities
         public static void WaitToBeClickable(IWebDriver driver, string locator, string locatorValue, int Seconds)
         {
             var wait = new WebDriverWait(driver, new TimeSpan(0, 0, Seconds));
-            
-            if(locator=="XPath")
+
+            if (locator == "XPath")
             {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath("locatorValue")));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(locatorValue)));
             }
             if (locator == "Id")
             {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("locatorValue")));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id(locatorValue)));
             }
-            if(locator == "CssSelector")
+            if (locator == "CssSelector")
             {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector("locatorValue")));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.CssSelector(locatorValue)));
             }
 
         }
@@ -36,15 +36,15 @@ namespace RepoMay2022.Utilities
 
             if (locator == "XPath")
             {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath("locatorValue")));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.XPath(locatorValue)));
             }
             if (locator == "Id")
             {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id("locatorValue")));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.Id(locatorValue)));
             }
             if (locator == "CssSelector")
             {
-                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector("locatorValue")));
+                wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(locatorValue)));
             }
         }
     }
