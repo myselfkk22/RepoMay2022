@@ -42,21 +42,22 @@ namespace RepoMay2022.Pages
 
             //Check if Meterial record created
             IWebElement newcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-           
-                 if(newcode.Text == "Material Code1")
-                {
-                    Console.WriteLine("New meterial record created successfull,Test Passed");
-                }
-                else
-                {
-                    Console.WriteLine("New meterial record has not been Created, Test Failed");
-                }
+                //Example number 1
+                // if(newcode.Text == "Material Code1")
+                //{
+                //    Console.WriteLine("New meterial record created successfull,Test Passed");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("New meterial record has not been Created, Test Failed");
+                //}
+
+            //Example number 2
+            Assert.That(newcode.Text == "Material Code1", "Actual code and expected code do not match");
 
 
 
-
-
-            ////click on Administration button
+            //click on Administration button
             IWebElement admTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
             admTab.Click();
 
@@ -97,23 +98,23 @@ namespace RepoMay2022.Pages
 
             //Check if Time record created
             IWebElement newTimeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (newTimeCode.Text == "TimeCode1")
-            {
-                Console.WriteLine("New time record created successfull,Test Passed");
-            }
-            else
-            {
-                Console.WriteLine("New time record has not been Created, Test Failed");
-            }
-
+            //if (newTimeCode.Text == "TimeCode1")
+            //{
+            //    Console.WriteLine("New time record created successfull,Test Passed");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("New time record has not been Created, Test Failed");
+            //}
+            Assert.That(newTimeCode.Text == "TimeCode1", "Actual code and expected code do not match");
         }
 
         public void EditTM(IWebDriver driver)
         {
             Thread.Sleep(2000);
             //Go to last page where new record created will be
-            IWebElement goToLastPageBtn1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPageBtn1.Click();
+            IWebElement goToLastPageBtn= driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageBtn.Click();
             Thread.Sleep(2000);
             //Select Edit element and click
             IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
@@ -162,24 +163,24 @@ namespace RepoMay2022.Pages
 
             Thread.Sleep(2000);
             //Click go to lastPageButton 
-            IWebElement goToLastPageButtton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPageButtton.Click();
+            IWebElement goToLastPageBtn1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageBtn1.Click();
             Thread.Sleep(2000);
 
             //check the time record is edited
             IWebElement newEditCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
-            if (newEditCode.Text == "Code666")
-            {
-                Console.WriteLine("new time record edited.Test passed");
-            }
+            //if (newEditCode.Text == "Code666")
+            //{
+            //    Console.WriteLine("new time record edited.Test passed");
+            //}
 
-            else
-            {
-                Console.WriteLine("Time record has not been edited. Test failed");
-            }
+            //else
+            //{
+            //    Console.WriteLine("Time record has not been edited. Test failed");
+            //}
 
-
+            Assert.That(newEditCode.Text == "Code666", "Actual code and expected code do not match");
 
         }
 
@@ -188,8 +189,8 @@ namespace RepoMay2022.Pages
          {
             Thread.Sleep(2000);
 
-            IWebElement goToLastPageButtton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPageButtton.Click();
+            IWebElement goToLastPageButton= driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageButton.Click();
             Thread.Sleep(2000);
             //delete function
             IWebElement delete = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
@@ -205,13 +206,13 @@ namespace RepoMay2022.Pages
             Thread.Sleep(2000);
             
 
-            IWebElement goToLastPageBtn1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
-            goToLastPageBtn1.Click();
-            Thread.Sleep(2000);
+            IWebElement goToLastPageButton1 = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]/span"));
+            goToLastPageButton1.Click();
+            Thread.Sleep(3000);
 
             //check the item is deleted
-            IWebElement delElement = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-            if (delElement.Text != "Code666")
+            IWebElement editedElement = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            if (editedElement.Text != "Code666")
             {
                 Console.WriteLine("row deleted");
             }
@@ -220,7 +221,8 @@ namespace RepoMay2022.Pages
                 Console.WriteLine("row not deleted");
             }
 
-
+            //Assertion
+            //Assert.That(editedElement.Text == "Code666", "Actual code and expected code do not match");
 
 
         }
