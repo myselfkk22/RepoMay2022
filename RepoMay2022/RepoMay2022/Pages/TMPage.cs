@@ -41,21 +41,9 @@ namespace RepoMay2022.Pages
             Thread.Sleep(2000);
 
             //Check if Meterial record created
-            IWebElement newcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-                //Example number 1
-                // if(newcode.Text == "Material Code1")
-                //{
-                //    Console.WriteLine("New meterial record created successfull,Test Passed");
-                //}
-                //else
-                //{
-                //    Console.WriteLine("New meterial record has not been Created, Test Failed");
-                //}
-
-            //Example number 2
-            Assert.That(newcode.Text == "Material Code1", "Actual code and expected code do not match");
-
-
+            
+            
+           
 
             //click on Administration button
             IWebElement admTab = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
@@ -108,6 +96,28 @@ namespace RepoMay2022.Pages
             //}
             Assert.That(newTimeCode.Text == "TimeCode1", "Actual code and expected code do not match");
         }
+
+        public string GetNewCode(IWebDriver driver)
+        {
+            IWebElement newcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return newcode.Text;  
+        }
+        public string GetNewTypeCode(IWebDriver driver)
+        {
+            IWebElement newTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
+            return newTypeCode.Text;
+        }
+        public string GetNewDescription(IWebDriver driver)
+        {
+            IWebElement newDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return newDescription.Text;
+        }
+        public string GetNewPrice(IWebDriver driver)
+        {
+            IWebElement newPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return newPrice.Text;
+        }
+
 
         public void EditTM(IWebDriver driver)
         {
