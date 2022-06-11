@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace RepoMay2022.Feature
+namespace RepoMay2022.Specflow
 {
     using TechTalk.SpecFlow;
     using System;
@@ -35,7 +35,7 @@ namespace RepoMay2022.Feature
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Feature", "TMFeature", "As a TurnUp portal admin\r\nI would like to create, edit and delete Time and Meteri" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Specflow", "TMFeature", "As a TurnUp portal admin\r\nI would like to create, edit and delete Time and Meteri" +
                     "alrecords\r\nso that i can manage Employee\'s time and materials successfully", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }

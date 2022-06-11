@@ -12,7 +12,7 @@ using TechTalk.SpecFlow;
 namespace RepoMay2022.StepDefinitions
 {
     [Binding]
-    internal class TMFeatureStepDefinition : CommonDriver
+   public class TMFeatureStepDefinition : CommonDriver
     {
         [Given(@"I logged into turn poratl successfully")]
         public void GivenILoggedIntoTurnPoratlSuccessfully()
@@ -47,16 +47,18 @@ namespace RepoMay2022.StepDefinitions
         public void ThenTheRecordShouldBeCreatedSuccessfully()
         {
             TMPage tmPageObj = new TMPage();
+           
             string newCode = tmPageObj.GetNewCode(driver);
             string newTypeCode = tmPageObj.GetNewTypeCode(driver);
             string newDescription = tmPageObj.GetNewDescription(driver);
             string newPrice = tmPageObj.GetNewPrice(driver);
             
+            
             Assert.That(newCode == "Material Code1", "Actual code and expected code do not match.");
-            Assert.That(newTypeCode == "M", "Actual typecode and expected code do not match.");
+            Assert.That(newTypeCode == "M", "Actual typecode and expected type code do not match.");
             Assert.That(newDescription == "First Material Record", "Actual description and expected description do not match.");
             Assert.That(newPrice == "$22.00", "Actual price and expected price do not match.");
-
+            
         }
 
     }
