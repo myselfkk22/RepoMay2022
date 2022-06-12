@@ -33,7 +33,7 @@ namespace RepoMay2022
             homepageObj.GoToTMpage(driver);
             
             //Edit TM
-            tmPageObj.EditTM(driver);
+            tmPageObj.EditTM(driver,"dummy0","dummy1", "dummy2");
         }
         [Test, Order(3),Description("Delete Time record edited in test number 2")]
         public void DeleteTM()

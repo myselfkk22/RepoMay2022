@@ -44,6 +44,8 @@ namespace RepoMay2022.Pages
 
         }
 
+       
+
         public string GetNewCode(IWebDriver driver)
         {
             IWebElement newcode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
@@ -65,7 +67,7 @@ namespace RepoMay2022.Pages
             return newPrice.Text;
         }
 
-        public void EditTM(IWebDriver driver)
+        public void EditTM(IWebDriver driver, string description, string code, string price)
         {
             Thread.Sleep(2000);
             //Go to last page where new record created will be
@@ -83,7 +85,7 @@ namespace RepoMay2022.Pages
 
             IWebElement editCode = driver.FindElement(By.Id("Code"));
             editCode.Clear();
-            editCode.SendKeys("Material Code666");
+            editCode.SendKeys(code);
             Console.WriteLine("code entered");
             Thread.Sleep(2500);
 
@@ -91,7 +93,7 @@ namespace RepoMay2022.Pages
 
             IWebElement editDescriptionTextBox = driver.FindElement(By.Id("Description"));
             editDescriptionTextBox.Clear();
-            editDescriptionTextBox.SendKeys("Modified Material record");
+            editDescriptionTextBox.SendKeys(description);
             Console.WriteLine("new Material description entered");
             Thread.Sleep(2500);
 
@@ -105,7 +107,7 @@ namespace RepoMay2022.Pages
             editPrice.Clear();
             Thread.Sleep(2000);
             priceInputTags.Click();
-            editPrice.SendKeys("66");
+            editPrice.SendKeys(price);
             Console.WriteLine("new Material price entered");
 
             Thread.Sleep(2500);
@@ -122,7 +124,7 @@ namespace RepoMay2022.Pages
             Thread.Sleep(2000);
 
             //check the time record is edited
-            IWebElement newEditCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            //IWebElement newEditCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
 
             //if (newEditCode.Text == "Code666")
             //{
@@ -134,8 +136,23 @@ namespace RepoMay2022.Pages
             //    Console.WriteLine("Time record has not been edited. Test failed");
             //}
 
-            Assert.That(newEditCode.Text == "Material Code666", "Actual code and expected code do not match");
+            //Assert.That(newEditCode.Text == "Material Code666", "Actual code and expected code do not match");
 
+        }
+        public string GetEditedDescription(IWebDriver driver)
+        {
+            IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return editedDescription.Text;
+        }
+        public string GetEditedCode(IWebDriver driver)
+        {
+            IWebElement editedCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return editedCode.Text;
+        }
+        public string GetEditedPrice(IWebDriver driver)
+        {
+            IWebElement editprice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return editprice.Text;
         }
 
 
