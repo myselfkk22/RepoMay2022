@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
@@ -17,32 +18,24 @@ namespace RepoMay2022.Pages
 
             //launch turn up portal
             driver.Navigate().GoToUrl("http://horse.industryconnect.io/Account/Login?ReturnUrl=%2f");
-
-            //identify username textbox, enter valid username
-            driver.FindElement(By.Id("UserName")).SendKeys("hari");
-
-            //identify password textbox, enter valid password
-            driver.FindElement(By.Id("Password")).SendKeys("123123");
-
-
-            //identify login button and click
-
-            driver.FindElement(By.XPath("//*[@id='loginForm']/form/div[3]/input[1]")).Click();
-
-            Thread.Sleep(1000);
-
-            //check if user logged in successfully
-
-            IWebElement webElement = driver.FindElement(By.XPath("//*[@id='logoutForm']/ul/li/a"));
-
-            if (webElement.Text == "Hello hari!")
+            try
             {
-                Console.WriteLine("logged in successfully,test passed.");
+                //identify username textbox, enter valid username
+                driver.FindElement(By.Id("UserName")).SendKeys("hari");
+
+                //identify password textbox, enter valid password
+                driver.FindElement(By.Id("Password")).SendKeys("123123");
+
+
+                //identify login button and click
+
+                driver.FindElement(By.XPath("//*[@id='loginForm']/form/div[3]/input[1]")).Click();
             }
-            else
+            catch(Exception ex)
             {
-                Console.WriteLine("logged in failed, test failed.");
+                Assert.Fail("TurnUp portal page did not launch.", ex.Message);
             }
+            
         }
     }
 }
