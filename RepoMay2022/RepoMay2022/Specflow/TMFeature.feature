@@ -11,7 +11,7 @@ Scenario: 1 Create time and material record with valid data
 	Then The record should be created successfully
 
 @Edit
-Scenario: 2 Edit existing time and material record
+Scenario Outline: 2 Edit existing time and material record
 Given I logged into turn poratl successfully
 When I navigate to Time and Material page
 When I update '<Description>','<Code>','<Price>' on an existing time and material record
@@ -23,4 +23,12 @@ Examples:
 | Keyboard     | May666 | $16.00   |
 | Pendrive     | Phone1 | $150.00  |
 | EditedRecord | Portal | $49.00   |
+
+@Delete
+Scenario: 3 Delete existing time and material record
+Given I logged into turn poratl successfully
+When I navigate to Time and Material page
+When I deleted an existing time and material record 
+Then the record should be deleted sucessfully
+
 

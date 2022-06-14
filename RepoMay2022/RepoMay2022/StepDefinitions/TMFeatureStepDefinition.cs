@@ -74,13 +74,31 @@ namespace RepoMay2022.StepDefinitions
             TMPage tmPageObj = new TMPage();
 
             string editedDescription = tmPageObj.GetEditedDescription(driver);
-            string editedCode = tmPageObj.GetEditedCode(driver);
+            string editedCode = tmPageObj.GetdDeletedCode(driver);
             string editedPrice = tmPageObj.GetEditedPrice(driver);
 
             Assert.That(editedDescription == p0, "Actual description and expected description do not match.");
             Assert.That(editedCode == p1, "Actual code and expected code do not match.");
             Assert.That(editedPrice == p2, "Actual price and expected price do not match.");
 
+        }
+
+        [When(@"I deleted an existing time and material record")]
+        public void WhenIDeletedAnExistingTimeAndMaterialRecord()
+        {
+            TMPage tmPageObj = new TMPage();
+            tmPageObj.DeleteTM(driver);
+        }
+
+        [Then(@"the record should be deleted sucessfully")]
+        public void ThenTheRecordShouldBeDeletedSucessfully()
+        {
+            TMPage tmPageObj = new TMPage();
+            
+            tmPageObj.CodeDeleteAssertion(driver);
+            tmPageObj.DescriptionDeleteAssertion(driver);
+            tmPageObj.PriceDeleteAssertion(driver);
+            
         }
 
     }
